@@ -3,7 +3,7 @@ package main;
 import java.util.Random;
 
 public class Interno extends Thread {
-
+	final static String tipoProducto = "ANY";
 	private int contadorFin = 0;
 	private Buffer inputBuff;
 	private Buffer outputBuff;
@@ -20,21 +20,27 @@ public class Interno extends Thread {
 
 		while (!str.equals("FIN_A"))
 
-		// System.out.println(String.format("Enter Level: %d Process: %d", level,
-		// processNum));
-		String str = this.inputBuff.withdraw();
+			// System.out.println(String.format("Enter Level: %d Process: %d", level,
+			// processNum));
+			str = this.inputBuff.quitar(tipoProducto);
 
 		while (!str.equals("FIN")) {
-			str = String.format(str + "T%d%d", level, processNum);
-			this.outputBuff.store(str);
-			str = this.inputBuff.withdraw();
+			//No entendi cual es la idea de este string tengo entendido que solo pasamos cadenas 
+			//de un lado a otro
+
+
+			//str = String.format(str + "T%d%d", level, processNum);
+
+
+			this.outputBuff.poner(str);
+			str = this.inputBuff.quitar(tipoProducto);
 			try {
-				Thread.sleep(rand.nextInt(501) + 50);
+				Thread.sleep(new Random().nextInt(501) + 50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 
-		this.outputBuff.store(str);
+		this.outputBuff.poner(str);
 	}
 }
