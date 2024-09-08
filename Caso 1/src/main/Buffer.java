@@ -33,7 +33,7 @@ public class Buffer {
 			return this.buffer.poll();
 
 		} else if (tipoProducto.equals("A")) {
-			while (buffer.isEmpty() || !buffer.peek().equals("A") || !buffer.peek().equals("FIN_A")) {
+			while (buffer.isEmpty() || (!buffer.peek().equals("A") && !buffer.peek().equals("FIN_A"))) {
 				try {
 					this.wait();
 				} catch (InterruptedException e) {
@@ -44,7 +44,7 @@ public class Buffer {
 			return this.buffer.poll();
 
 		} else if (tipoProducto.equals("B")) {
-			while (buffer.isEmpty() || !buffer.peek().equals("B") || !buffer.peek().equals("FIN_B")) {
+			while (buffer.isEmpty() || (!buffer.peek().equals("B") && !buffer.peek().equals("FIN_B"))) {
 				try {
 					this.wait();
 				} catch (InterruptedException e) {

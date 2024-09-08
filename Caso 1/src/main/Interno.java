@@ -1,46 +1,38 @@
 package main;
 
-import java.util.Random;
-
 public class Interno extends Thread {
-	final static String tipoProducto = "ANY";
-	private int contadorFin = 0;
+	final static String tipoProducto = "Any";
+	private int contadorFin;
 	private Buffer inputBuff;
 	private Buffer outputBuff;
 
-	public Interno(int contadorFin, Buffer bufferConsumer, Buffer buffersPoner) {
+	public Interno(int contadorFin, Buffer inputBuffer, Buffer outputBuffer) {
 		this.contadorFin = contadorFin;
-		this.inputBuff = bufferConsumer;
-		this.outputBuff = buffersPoner;
+		this.inputBuff = inputBuffer;
+		this.outputBuff = outputBuffer;
 	}
 
 	@Override
 	public void run() {
-		String str = this.inputBuff.quitar("Any");
+		while (contadorFin > 0) {
+			while (this.inputBuff.getVacio()) {
+				Thread.yield();
+			}
+			String str = this.inputBuff.quitar(this.tipoProducto);
+			System.out.println("Se quito del buffer de entrada: " + str);
 
-		while (!str.equals("FIN_A"))
+			if (str.contains("FIN")) {
+				System.out.println("Se encontro un FIN");
+				contadorFin--;
+			}
 
-			// System.out.println(String.format("Enter Level: %d Process: %d", level,
-			// processNum));
-			str = this.inputBuff.quitar(tipoProducto);
-
-		while (!str.equals("FIN")) {
-			//No entendi cual es la idea de este string tengo entendido que solo pasamos cadenas 
-			//de un lado a otro
-
-
-			//str = String.format(str + "T%d%d", level, processNum);
-
+			while (this.outputBuff.getLleno()) {
+				Thread.yield();
+			}
 
 			this.outputBuff.poner(str);
-			str = this.inputBuff.quitar(tipoProducto);
-			try {
-				Thread.sleep(new Random().nextInt(501) + 50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			System.out.println("Se puso en el buffer de salida: " + str);
 		}
-
-		this.outputBuff.poner(str);
+		System.out.println("Interno con thread id: " + Thread.currentThread().threadId() + " ha terminado de procesar");
 	}
 }

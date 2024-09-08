@@ -1,7 +1,7 @@
 package main;
 
 public class Productor extends Thread {
-
+	
 	private int numProductos;
 	private String tipoProducto;
 	private Buffer buffer;
@@ -19,8 +19,10 @@ public class Productor extends Thread {
 
 	public void producir() {
 		for (int i = 0; i < this.numProductos; i++) {
+			System.out.println("Productor con thread id: " + Thread.currentThread().threadId() + " ha producido: " + tipoProducto);
 			this.buffer.poner(tipoProducto);
 		}
+		System.out.println("Productor con thread id: " + Thread.currentThread().threadId() + " ha terminado de producir: " + tipoProducto);
 		this.buffer.poner("FIN_" + tipoProducto);
 	}
 
