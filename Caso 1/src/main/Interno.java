@@ -22,7 +22,7 @@ public class Interno extends Thread {
 			System.out.println("Interno con thread id: " + Thread.currentThread().threadId() + " ha quitado: " + str);
 
 			if (str.contains("FIN")) {
-				System.out.println("Se encontro un FIN");
+				System.out.println("Interno con thread id: " + Thread.currentThread().threadId() + " ha encontrado un FIN");
 				contadorFin--;
 			}
 
