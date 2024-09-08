@@ -1,7 +1,7 @@
 package main;
 
 public class Interno extends Thread {
-	final static String tipoProducto = "Any";
+	private String tipoProducto = "Any";
 	private int contadorFin;
 	private Buffer inputBuff;
 	private Buffer outputBuff;
@@ -19,7 +19,7 @@ public class Interno extends Thread {
 				Thread.yield();
 			}
 			String str = this.inputBuff.quitar(this.tipoProducto);
-			System.out.println("Se quito del buffer de entrada: " + str);
+			System.out.println("Interno con thread id: " + Thread.currentThread().threadId() + " ha quitado: " + str);
 
 			if (str.contains("FIN")) {
 				System.out.println("Se encontro un FIN");
@@ -31,7 +31,7 @@ public class Interno extends Thread {
 			}
 
 			this.outputBuff.poner(str);
-			System.out.println("Se puso en el buffer de salida: " + str);
+			System.out.println("Interno con thread id: " + Thread.currentThread().threadId() + " ha puesto: " + str);
 		}
 		System.out.println("Interno con thread id: " + Thread.currentThread().threadId() + " ha terminado de procesar");
 	}

@@ -70,6 +70,6 @@ public class Buffer {
 		}
 
 		this.buffer.add(mensaje);
-		this.notify();
+		this.notifyAll();
 	}
 }
