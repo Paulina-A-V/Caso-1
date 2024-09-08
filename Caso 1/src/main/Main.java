@@ -1,11 +1,23 @@
 package main;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        int capDepProd = 10;
-        int capDepDist = 10;
-        int numProductos = 1;
+       
+        Scanner scanner = new Scanner(System.in);
 
+        // Ask the user for the number of products to be produced
+        System.out.print("Entre el número de producto que desea producir: ");
+        int numProductos = scanner.nextInt();
+
+        // Ask the user for the capacity of the production deposit
+        System.out.print("Entre la capacidad del deposito de producción: ");
+        int capDepProd = scanner.nextInt();
+
+        // Ask the user for the capacity of the distribution deposit
+        System.out.print("Entre la capacidad del deposito de distribución: ");
+        int capDepDist = scanner.nextInt();
 
         Buffer depositoProduccion = new Buffer(capDepProd);
         Buffer depositoDistribucion = new Buffer(capDepDist);
@@ -64,5 +76,6 @@ public class Main {
 
         System.out.println("Main thread finished");
 
+        scanner.close();
     }
 }
