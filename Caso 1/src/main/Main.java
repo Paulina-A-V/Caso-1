@@ -7,15 +7,15 @@ public class Main {
        
         Scanner scanner = new Scanner(System.in);
 
-        // Ask the user for the number of products to be produced
+
         System.out.print("Entre el número de producto que desea producir: ");
         int numProductos = scanner.nextInt();
 
-        // Ask the user for the capacity of the production deposit
+        
         System.out.print("Entre la capacidad del deposito de producción: ");
         int capDepProd = scanner.nextInt();
 
-        // Ask the user for the capacity of the distribution deposit
+        
         System.out.print("Entre la capacidad del deposito de distribución: ");
         int capDepDist = scanner.nextInt();
 
@@ -50,8 +50,6 @@ public class Main {
         interno2.start();
 
        
-
-        // wait for all threads to finish
         try {
             productorA1.join();
             productorA2.join();
